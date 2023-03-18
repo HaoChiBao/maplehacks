@@ -1,42 +1,33 @@
-import DisplayPatient from "./patientDisplay";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import DisplayPatient from "./DisplayPatient";
 import "./patientList.css";
-function PatientList(){
-    const patients = [
-        {
-            name: 'John Doe',
-            age: 20,
-            reason: 'Cough',
-        },
-        {
-            name: 'Burry Koe',
-            age: 10,
-            reason: 'Can\'t breath',
-        },
-        {
-            name: 'Alexandar Jorge',
-            age: 19,
-            reason: 'Dying',
-        },
-        {
-            name: 'John Doe',
-            age: 20,
-            reason: 'Cough',
-        },
-        {
-            name: 'Burry Koe',
-            age: 10,
-            reason: 'Can\'t breath',
-        }
-    ]
-    const [currentPatient, setCurrentPatient] = useState(patients[2])
-    return (
-        <div className="patientlist">
-            <h1>Patient List</h1>
-            {patients.map((patient) => {
-                return <DisplayPatient patient = {patient} key = {'uid'}/>
-            })}
-        </div>
-    )
-}
+import io from "socket.io-client";
+
+const socket = io("http://localhost:3001");
+
+const PatientList = () => {
+  const [currentPatientQueue, setcurrentPatientQueue] = useState([]);
+
+  useEffect(() => {
+    socket.emit("get_patient_queue");
+
+    socket.on("patient_queue", (queue) => {
+      setcurrentPatientQueue(queue);
+    });
+
+    // Clean up event listener when component unmounts
+    return () => {
+      socket.off("patient_queue");
+    };
+  }, []);
+
+  return (
+    <div className="patientlist">
+      <h1>Patient List</h1>
+      {currentPatientQueue.map((patient) => {
+        return <DisplayPatient patient={patient.name} key={patient.socketID} />;
+      })}
+    </div>
+  );
+};
 export default PatientList;
