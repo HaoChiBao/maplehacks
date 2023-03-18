@@ -1,7 +1,7 @@
 import {Route, Routes} from 'react-router-dom';
-import Landing from './pages/landing';
-import Doctor from './pages/doctor';
-import Patient from './pages/patient';
+import Landing from './landing';
+import Doctor from './Doctor/doctor';
+import Patient from './Patient/patient';
 
 function App() {
   return (
