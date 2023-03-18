@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 function Patient() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
