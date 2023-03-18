@@ -2,8 +2,8 @@
     height: 100%;
     width: auto;
     overflow-y: scroll;
-    border: 1px solid #ccc;
-    margin: 1rem;
+    border-left: 1px solid #ccc;
+    margin: 1rem 0rem 1rem 1rem;
     padding: 1rem;
 }
 .patientlist .patient{
