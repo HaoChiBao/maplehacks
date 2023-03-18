@@ -1,6 +1,8 @@
-import {Route, Routes} from 'react-router-dom';
-import Landing from './landing';
-import Patient from './Patient/patient';
+import { Routes, Route } from "react-router-dom";
+import Landing from "./landing";
+
+import Patient from "./Patient/patient";
+import WaitingRoom from "./Patient/WaitingRoom";
 
 import Doctor from './Doctor/doctor';
 import DoctorDashboard from './Doctor/dashboard';
@@ -10,6 +12,7 @@ function App() {
     <Routes>
       <Route exact path="/" element={<Landing />} />
       <Route path="/patient" element={<Patient />} />
+      <Route path="/waiting-room" element={<WaitingRoom />} />
       <Route path="/doctor" element={<Doctor />} />
       <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
     </Routes>

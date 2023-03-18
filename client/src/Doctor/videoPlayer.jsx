@@ -15,12 +15,12 @@ export const VideoPlayer = ({ user }) => {
         <div className = 'username'>
           {user.uid}
         </div>
-        <div
+        <div className='video'
           ref={ref}
         style={{ 
             width: '45vw', 
             height: '30vw', 
-            position:'absolute', 
+            // position:'absolute', 
             opacity:'1' }}
         >
         </div>
