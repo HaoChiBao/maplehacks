@@ -35,9 +35,6 @@ io.on("connection", (socket) => {
   socket.on("get_queue_position", (user) => {
     let position = 0;
 
-    console.log(waitingRoomQueue);
-    console.log("Backend, user is: ", user.socketID);
-
     const current_user_id = user.socketID;
 
     for (let i = 0; i < waitingRoomQueue.length; i++) {
