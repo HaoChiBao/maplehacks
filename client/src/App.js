@@ -1,7 +1,8 @@
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Landing from "./landing";
 import Doctor from "./Doctor/doctor";
-import Patient from "./Patient/patient";
+import Patient from "./Patient/Patient";
+import WaitingRoom from "./Patient/WaitingRoom";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route exact path="/" element={<Landing />} />
       <Route path="/doctor" element={<Doctor />} />
       <Route path="/patient" element={<Patient />} />
+      <Route path="/waiting-room" element={<WaitingRoom />} />
     </Routes>
   );
 }
