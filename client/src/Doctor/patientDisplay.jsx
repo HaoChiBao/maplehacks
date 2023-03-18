@@ -10,7 +10,6 @@ function DisplayPatient(props){
             <h3>{age}</h3>
             Reason:
             <h3>{reason}</h3>
-            =-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         </div>
     )
 }

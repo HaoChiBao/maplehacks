@@ -1,0 +1,15 @@
+.patientlist{
+    height: 100%;
+    width: auto;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    margin: 1rem;
+    padding: 1rem;
+}
+.patientlist .patient{
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}

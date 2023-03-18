@@ -1,6 +1,7 @@
 import AgoraRTC from 'agora-rtc-sdk-ng';
 
 import PatientList from './patientList'
+import './dashboard.css'
 
 import React, { useEffect, useState } from 'react';
 import { VideoPlayer } from './videoPlayer';
@@ -78,7 +79,13 @@ function DoctorDashboard(){
         }, []);
 
     return (
-        <div className="video-call">
+        <div className="video-call"
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
             <div
             style={{
                 display: "flex",
