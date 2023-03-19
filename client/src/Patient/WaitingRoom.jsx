@@ -9,7 +9,8 @@ const socket = io("http://localhost:3001");
 
 const WaitingRoom = () => {
   const [messages, setMessages] = useState([]);
-  const [msgComponents, setMsgComponents] = useState();
+  // const messages = [];
+  const [msgComponents, setMsgComponents] = useState([]);
   const [userQuery, setUserQuery] = useState("");
 
   const gptQueryKey = (e) => {
