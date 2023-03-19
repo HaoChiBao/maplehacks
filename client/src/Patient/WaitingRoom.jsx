@@ -9,9 +9,10 @@ const socket = io("http://localhost:3001");
 
 const WaitingRoom = () => {
   const [messages, setMessages] = useState([]);
+  // const messages = [];
   const [msgComponents, setMsgComponents] = useState();
   const [userQuery, setUserQuery] = useState("");
-  
+
   const gptQueryKey = (e) => {
     if(e.key == "Enter"){
       gptQuery();
@@ -25,18 +26,14 @@ const WaitingRoom = () => {
     messages.push({type: 'user', message: userQuery});
     messages.push({type: 'chatbot', message: "loading..."});
     
-    // console.log(userQuery);
-    console.log(messages)
-    // setMsgComponents();
     setMsgComponents(messages.map((message) => {
-      console.log(message)
       return <ChatMessage type={message.type} message={message.message}/>
     }))
 
-    console.log("Submitting")
+    console.log("Submitting") 
   
     const url = "https://api.openai.com/v1/engines/text-davinci-003/completions";
-    const key = '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'
+    const key = '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'
     const bearer = 'Bearer ' + key
     // console.log(bearer)
   
