@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
 import AgoraRTC from "agora-rtc-sdk-ng";
-import io from "socket.io-client";
-import PatientList from "./patientList";
-import "./dashboard.css";
-import StartMeeting from "./StartMeeting";
-import { VideoPlayer } from "./videoPlayer";
+import PatientList from "../Doctor/patientList";
+import "../Doctor/dashboard.css";
+import React, { useEffect, useState } from "react";
+import { VideoPlayer } from "../Doctor/videoPlayer";
 
 const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 const APP_ID = "fd724da3607e4f568c1775a94077234d";
@@ -12,14 +10,12 @@ const TOKEN =
   "007eJxTYFjpwGwXrVYQIBBycvWT2883rnyw60C0RXnNyms8s9t0TNsVGFLSTJNMUtKMDVPNjE2SkpOT0kxSTMyTUo2MTZMM0lJSDX+LpjQEMjKE2TEyMTJAIIjPxZCbWJCTmpGYnF3MwAAAK8ch2Q==";
 
 const CHANNEL = "maplehacks";
-const socket = io("http://localhost:3001");
 
-const DoctorDashboard = () => {
+const MeetingRoom = () => {
   const [users, setUsers] = useState([]);
   const [localTracks, setLocalTracks] = useState([]);
-  //   const [meetingStarted, setMeetingStarted] = useState(false);
 
-  const isDoctor = localStorage.getItem("maplehacks-isdoctor") == "true";
+  const isDoctor = localStorage.getItem("maplehacks-isdoctor") === "true";
   console.log(isDoctor, "- is doctor");
 
   const handleUserJoined = async (user, mediaType) => {
@@ -66,10 +62,6 @@ const DoctorDashboard = () => {
         temp = tracks;
         // console.log(temp, 'temp')
       });
-
-    const handleStartMeeting = () => {
-      socket.emit("start_meeting");
-    };
     return () => {
       for (let localTrack of localTracks) {
         localTrack.stop();
@@ -91,10 +83,6 @@ const DoctorDashboard = () => {
     "https://www.svgrepo.com/show/309378/call-outbound.svg"
   );
 
-  const handleStartMeeting = () => {
-    socket.emit("start_meeting");
-  };
-
   return (
     <div
       className="video-call"
@@ -111,6 +99,8 @@ const DoctorDashboard = () => {
           alignItems: "center",
         }}
       >
+        {/* <Gradient></Gradient> */}
+
         <div
           className="video-container"
           style={{
@@ -176,10 +166,7 @@ const DoctorDashboard = () => {
           </div>
         </div>
       </div>
-      {isDoctor && <PatientList />}
-      <div onClick={handleStartMeeting}>{<StartMeeting />}</div>
     </div>
   );
 };
-
-export default DoctorDashboard;
+export default MeetingRoom;

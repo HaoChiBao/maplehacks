@@ -52,18 +52,37 @@ io.on("connection", (socket) => {
     io.emit("waiting_room_count", waitingRoomCount);
   });
 
+  // connect first user in queue to call
+  socket.on("start_meeting", () => {
+    console.log("Made it here");
+    if (waitingRoomQueue.length > 0) {
+      const user = waitingRoomQueue.shift(); // remove the first user in the queue
+      connectedClients.delete(user.socketID); // remove the user from the connected clients
+
+      // update the position of all users in the queue
+      waitingRoomQueue.forEach((user, index) => {
+        user.position--;
+      });
+
+      // emit the updated patient queue and waiting room count to all clients
+      io.emit("patient_queue", waitingRoomQueue);
+      io.emit("waiting_room_count", --waitingRoomCount);
+
+      // emit the "connect_to_call" event to the user who was removed from the queue
+      io.emit("connect_to_call");
+    }
+  });
+
   // remove the user from the waiting room queue when the user disconnects
   socket.on("disconnect", () => {
-    console.log(waitingRoomQueue);
-    console.log(connectedClients);
     const current_user_id = socket.id;
     console.log("a user disconnected");
-    console.log(current_user_id);
 
     for (const [socketID, user] of connectedClients) {
       if (socketID === current_user_id) {
         waitingRoomQueue.splice(user.position - 1, 1);
         connectedClients.delete(socketID);
+        break;
       }
     }
 
@@ -81,33 +100,3 @@ io.on("connection", (socket) => {
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-// socket.on("get_queue_position", (user) => {
-//   let position = 0;
-
-//   const current_user_id = user.socketID;
-
-//   for (let i = 0; i < waitingRoomQueue.length; i++) {
-//     position = i + 1;
-//     if (waitingRoomQueue[i]["socketID"] === current_user_id) {
-//       break;
-//     }
-//   }
-
-//   io.emit("queue_position", position);
-// });
-
-// socket.on("leave_waiting_room", (user) => {
-//   const current_user_id = user.socketID;
-//   console.log("a user disconnected");
-
-//   // remove the user from the waiting room queue
-//   waitingRoomQueue = waitingRoomQueue.filter(
-//     (user) => user["socketID"] !== current_user_id
-//   );
-//   waitingRoomCount--;
-
-//   // emit the updated patient queue to all clients
-//   io.emit("patient_queue", waitingRoomQueue);
-//   io.emit("waiting_room_count", waitingRoomCount);
-// });

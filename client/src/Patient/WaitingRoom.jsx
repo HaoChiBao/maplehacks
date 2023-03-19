@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, Link, useLocation } from "react-router-dom";
-
+import AgoraRTC from "agora-rtc-sdk-ng";
 import io from "socket.io-client";
 import "./WaitingRoom.css";
 
@@ -8,7 +8,13 @@ import ChatMessage from "./chatMessage";
 
 const socket = io("http://localhost:3001");
 
-const messages = [];
+const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+const APP_ID = "fd724da3607e4f568c1775a94077234d";
+const TOKEN =
+  "007eJxTYFjpwGwXrVYQIBBycvWT2883rnyw60C0RXnNyms8s9t0TNsVGFLSTJNMUtKMDVPNjE2SkpOT0kxSTMyTUo2MTZMM0lJSDX+LpjQEMjKE2TEyMTJAIIjPxZCbWJCTmpGYnF3MwAAAK8ch2Q==";
+
+const CHANNEL = "maplehacks";
+
 const WaitingRoom = () => {
 
   const [response, setResponse] = useState("");
@@ -20,6 +26,8 @@ const WaitingRoom = () => {
   const [waitingRoomQueue, setWaitingRoomQueue] = useState([]);
   const [userPosition, setUserPosition] = useState(0);
   const [userJoined, setUserJoined] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [localTracks, setLocalTracks] = useState([]);
 
   const gptQueryKey = (e) => {
     if (e.key === "Enter") {
@@ -100,12 +108,38 @@ const WaitingRoom = () => {
           setUserPosition(i + 1);
           break;
         }
-        if (userPosition == 1) {
-          window.location.assign('/patient/meetingRoom')
-        }
       }
     });
   }, [searchParams]);
+
+  // listen for the 'connect_to_call' event
+  socket.on("connect_to_call", () => {
+    window.location.assign("/doctor/dashboard");
+    // create a new client object
+    const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+    // join the channel using the client object
+    client
+      .join(APP_ID, CHANNEL, TOKEN, null)
+      .then((uid) =>
+        Promise.all([AgoraRTC.createMicrophoneAndCameraTracks(), uid])
+      )
+      .then(([tracks, uid]) => {
+        const [audioTrack, videoTrack] = tracks;
+        setLocalTracks(tracks);
+        setUsers((previousUsers) => [
+          ...previousUsers,
+          {
+            uid,
+            videoTrack,
+            audioTrack,
+          },
+        ]);
+        client.publish(tracks);
+        let temp = null;
+        temp = tracks;
+        // console.log(temp, 'temp')
+      });
+  });
 
   return (
     <div className="waitingRoom-page" onKeyDown={gptQueryKey}>
@@ -148,20 +182,3 @@ const WaitingRoom = () => {
 };
 
 export default WaitingRoom;
-
-// setMessages([...messages, {type: 'user', message: userQuery}]);
-// setMessages([...messages, {type: 'chatbot', message: "loading..."}]);
-// messages.push({ type: "user", message: userQuery });
-// messages.push({ type: "chatbot", message: "loading..." });
-
-// .finally(() => {
-//   let components = messages.map((message) => {
-//     return <ChatMessage type={message.type} message={message.message} />;
-//   });
-//   // console.log(components)
-
-//   setMsgComponents(components);
-//   // setMsgComponents([messages.map((message) => {
-//   //   return <ChatMessage type={message.type} message={message.message}/>
-//   // })])
-// });
