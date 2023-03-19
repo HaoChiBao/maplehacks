@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Landing from "./landing";
 
-import Patient from "./Patient/Patient";
+import Patient from "./Patient/patient";
 import WaitingRoom from "./Patient/WaitingRoom";
 import MeetingRoom from "./Patient/meetingRoom";
 import VideoExit from "./Doctor/videoExit";
