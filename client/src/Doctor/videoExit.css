@@ -1,0 +1,12 @@
+.videoExit-page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.videoExit-page img{
+    width: 3rem;
+    margin-top: 1rem;
+}
