@@ -6,8 +6,8 @@ import "./WaitingRoom.css";
 const socket = io("http://localhost:3001");
 
 const gptQuery = () => {
-  console.log("gptQuery")
-}
+  console.log("gptQuery");
+};
 
 const WaitingRoom = () => {
   const [waitingRoomCount, setWaitingRoomCount] = useState(0);
@@ -30,13 +30,6 @@ const WaitingRoom = () => {
       console.log(queue);
       setWaitingRoomQueue(queue);
       for (let i = 0; i < queue.length; i++) {
-        console.log(
-          "we are here in the front end: ",
-          i,
-          queue[i],
-          queue[i]["socketID"],
-          searchParams.get("socketID")
-        );
         if (queue[i]["socketID"] === searchParams.get("socketID")) {
           setUserPosition(i + 1);
           break;
@@ -46,29 +39,29 @@ const WaitingRoom = () => {
   }, [searchParams]);
 
   return (
-    <div className = 'waitingRoom-page'>
-      <div className = 'waiting-stat'>
+    <div className="waitingRoom-page">
+      <div className="waiting-stat">
         <h1>Waiting Room</h1>
-        {/* <p>
-          There are currently {waitingRoomCount} people in the waiting room.
-        </p> */}
 
         {userPosition >= 0 && (
           <p>Your position in the queue is: {userPosition}</p>
         )}
       </div>
 
-      <div className = 'gptChat'>
+      <div className="gptChat">
         <div>
           <h1>Chatbot</h1>
-          <p>While you're waiting, discuss with our chatbot about occurring symptoms</p>
-          <p>A copy of the chat's transcript will be sent to your awaited doctor</p>
+          <p>
+            While you're waiting, discuss with our chatbot about occurring
+            symptoms
+          </p>
+          <p>
+            A copy of the chat's transcript will be sent to your awaited doctor
+          </p>
         </div>
-        
+
         <div className="chatarea">
-
           <div className="chatbox">
-
             <div className="chatbot">
               <div className="message">
                 <p>Hi, I'm your chatbot. How can I help you?</p>
@@ -79,14 +72,12 @@ const WaitingRoom = () => {
                 <p>Hi, I'm your user</p>
               </div>
             </div>
-
           </div>
-          <div className = "queryBox">
+          <div className="queryBox">
             <input type="text" placeholder="ask me something!" />
             <button onClick={gptQuery}>Send</button>
           </div>
         </div>
-
       </div>
     </div>
   );
