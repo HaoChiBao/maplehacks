@@ -8,10 +8,13 @@ import ChatMessage from "./chatMessage";
 
 const socket = io("http://localhost:3001");
 
+const messages = [];
 const WaitingRoom = () => {
-  const [messages, setMessages] = useState([]);
-  const [msgComponents, setMsgComponents] = useState([]);
+
+  const [response, setResponse] = useState("");
+
   const [userQuery, setUserQuery] = useState("");
+
   const [waitingRoomCount, setWaitingRoomCount] = useState(0);
   const [searchParams] = useSearchParams();
   const [waitingRoomQueue, setWaitingRoomQueue] = useState([]);
@@ -35,7 +38,7 @@ const WaitingRoom = () => {
     const url =
       "https://api.openai.com/v1/engines/text-davinci-003/completions";
     // const key = process.env.GPT_KEY;
-    const key = "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";
+    const key = "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";
     // console.log("Key is: ", key);
     const bearer = "Bearer " + key;
     // console.log(bearer)
@@ -70,38 +73,14 @@ const WaitingRoom = () => {
         // console.log(Object.keys(data))
         console.log(data);
         console.log(data["choices"][0].text);
-
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { type: "chatbot", message: data["choices"][0].text },
-        ]);
-        console.log(messages);
+        messages.push({ type: "chatbot", message: data["choices"][0].text });
+        setResponse(data["choices"][0].text);
       })
       .catch((error) => {
         console.log(error);
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { type: "chatbot", message: error },
-        ]);
+        setResponse(error);
       });
   };
-
-  useEffect(() => {
-    let components = messages.map((message, index) => {
-      // console.log("updating messages, ", message);
-      return (
-        <ChatMessage
-          key={index}
-          type={message["type"]}
-          message={message["message"]}
-        />
-      );
-    });
-    setMsgComponents(components);
-    // msgComponents.push(components);
-
-    console.log("Message components is: , ", msgComponents);
-  }, [messages]);
 
   useEffect(() => {
     if (!userJoined) {
@@ -139,7 +118,7 @@ const WaitingRoom = () => {
       </div>
 
       <div className="gptChat">
-        <div>
+        <div className = "title">
           <h1>Chatbot</h1>
           <p>
             While you're waiting, discuss with our chatbot about occurring
@@ -151,7 +130,9 @@ const WaitingRoom = () => {
         </div>
 
         <div className="chatarea">
-          <div className="chatbox">{msgComponents}</div>
+          <div className="chatbox">
+            {response}
+            </div>
           <div className="queryBox">
             <input
               type="text"
