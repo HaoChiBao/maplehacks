@@ -3,7 +3,7 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 import "./patient.css";
 
-const socket = io("http://localhost:3001");
+const socket = io("http://localhost:3000/");
 
 const Patient = () => {
   // state to set name and reason for user

@@ -7,7 +7,7 @@ import { VideoPlayer } from "../Doctor/videoPlayer";
 
 import ChatMessage from "./chatMessage";
 
-const socket = io("http://localhost:3001");
+const socket = io("http://localhost:3000/");
 
 const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 const APP_ID = "fd724da3607e4f568c1775a94077234d";

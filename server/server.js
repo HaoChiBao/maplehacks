@@ -1,7 +1,10 @@
 const express = require("express");
 const http = require("http");
 const app = express();
+const cors = require("cors");
 const server = http.createServer(app);
+
+app.use(cors());
 const io = require("socket.io")(server, {
   cors: {
     origin: "*",
@@ -24,6 +27,8 @@ class User {
 }
 
 io.on("connection", (socket) => {
+  console.log("Did you guys get here?");
+
   socket.on("join_waiting_room", (data) => {
     console.log(`${data.name} joined the waiting room`);
 

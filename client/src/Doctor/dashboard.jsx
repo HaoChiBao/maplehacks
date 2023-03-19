@@ -12,14 +12,14 @@ const TOKEN =
   "007eJxTYFjpwGwXrVYQIBBycvWT2883rnyw60C0RXnNyms8s9t0TNsVGFLSTJNMUtKMDVPNjE2SkpOT0kxSTMyTUo2MTZMM0lJSDX+LpjQEMjKE2TEyMTJAIIjPxZCbWJCTmpGYnF3MwAAAK8ch2Q==";
 
 const CHANNEL = "maplehacks";
-const socket = io("http://localhost:3001");
+const socket = io("http://localhost:3000/");
 
 const DoctorDashboard = () => {
   const [users, setUsers] = useState([]);
   const [localTracks, setLocalTracks] = useState([]);
   //   const [meetingStarted, setMeetingStarted] = useState(false);
 
-  const isDoctor = localStorage.getItem("maplehacks-isdoctor") == "true";
+  const isDoctor = localStorage.getItem("maplehacks-isdoctor") === "true";
   console.log(isDoctor, "- is doctor");
 
   const handleUserJoined = async (user, mediaType) => {
