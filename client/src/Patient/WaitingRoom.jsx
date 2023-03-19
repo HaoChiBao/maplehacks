@@ -146,7 +146,7 @@ const WaitingRoom = () => {
           <div className="queryBox">
             <input
               type="text"
-              placeholder="ask me something!"
+              placeholder="How are you feeling?"
               onChange={(e) => setUserQuery(e.target.value)}
             />
             <button onClick={gptQuery}>Send</button>

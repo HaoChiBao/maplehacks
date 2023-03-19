@@ -4,7 +4,6 @@ import Landing from "./landing";
 import Patient from "./Patient/Patient";
 import WaitingRoom from "./Patient/WaitingRoom";
 import MeetingRoom from "./Patient/meetingRoom";
-
 import VideoExit from "./Doctor/videoExit";
 
 import Doctor from "./Doctor/doctor";

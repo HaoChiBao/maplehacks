@@ -1,0 +1,62 @@
+.video-call{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    overflow: hidden;
+    color: white;
+}
+.video-call .video-player{
+    border-radius: 0.5rem;
+    margin: 10px;
+    overflow: hidden;
+}
+.video-call .video-player *{
+    background-color: white;
+}
+
+.video-call .video-buttons{
+    position: absolute;
+    
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* margin: 1rem; */
+    padding: 1rem;
+}
+.video-call .video-buttons button{
+    margin: 0 1rem;
+    padding: 1rem;;
+
+    border: none;
+    border-radius: 100rem;
+    
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}
+.video-call .video-buttons button:hover{
+    background-color: #7ca1ec;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}
+.video-call .video-buttons button:hover img{
+    background-color: #7ca1ec;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}
+
+.video-call .video-buttons button img{
+    width: 2rem;
+    height: 2rem;
+    background-color: white;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}

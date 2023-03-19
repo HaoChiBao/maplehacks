@@ -29,7 +29,7 @@ const Patient = () => {
     <div className="patient-page">
       <div className="form">
         <h1>Tell Us About Yourself</h1>
-        <h2>Your Name:</h2>
+        <h2>Full Name:</h2>
         <input type="text" onChange={(e) => setName(e.target.value)} />
         <h2>Reason for Meeting:</h2>
         <input type="reason" onChange={(e) => setReason(e.target.value)} />
