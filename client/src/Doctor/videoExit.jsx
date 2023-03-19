@@ -5,7 +5,7 @@ function VideoExit(){
     return (
         <div className = 'videoExit-page'>
             <h1>Thanks For Joining</h1>
-            <p>how did we do today?</p>
+            <p>How did we do today?</p>
 
             {/* five star rating images */}
             <div className = 'rating'>
