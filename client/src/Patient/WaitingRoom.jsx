@@ -17,11 +17,10 @@ const TOKEN =
 const CHANNEL = "maplehacks";
 
 const WaitingRoom = () => {
-
   const [response, setResponse] = useState("");
 
   const [userQuery, setUserQuery] = useState("");
-
+  const messages = [];
   const [waitingRoomCount, setWaitingRoomCount] = useState(0);
   const [searchParams] = useSearchParams();
   const [waitingRoomQueue, setWaitingRoomQueue] = useState([]);
@@ -131,7 +130,7 @@ const WaitingRoom = () => {
       </div>
 
       <div className="gptChat">
-        <div className = "title">
+        <div className="title">
           <h1>Chatbot</h1>
           <p>
             While you're waiting, discuss with our chatbot about occurring
@@ -143,9 +142,7 @@ const WaitingRoom = () => {
         </div>
 
         <div className="chatarea">
-          <div className="chatbox">
-            {response}
-            </div>
+          <div className="chatbox">{response}</div>
           <div className="queryBox">
             <input
               type="text"
