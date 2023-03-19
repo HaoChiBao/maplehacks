@@ -1,0 +1,99 @@
+.waitingRoom-page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.waitingRoom-page .waiting-stat{
+    width: 100%;
+}
+.waitingRoom-page .gptChat{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.waitingRoom-page .gptChat .chatarea{
+    height: 100%;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.waitingRoom-page .gptChat .chatarea .chatbox{
+    height: 100%;
+    overflow-y: scroll;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.waitingRoom-page .gptChat .chatarea .queryBox{
+    display: flex;
+}
+
+.waitingRoom-page .gptChat .chatarea button:active{
+    transform: scale(0.9);
+}
+.waitingRoom-page .gptChat .chatarea button:hover{
+    background-color: #ccc;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+}
+.waitingRoom-page .gptChat .chatarea button{
+    height: 3rem;
+    padding: 1rem;
+    margin-left: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+.waitingRoom-page .gptChat .chatarea input{
+    height: 3rem;
+    width:100%;
+    padding: 1rem;
+    /* margin: 1rem; */
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+.waitingRoom-page .gptChat .chatarea .message{
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    max-width: 50%;
+}
+
+.waitingRoom-page .gptChat .chatarea .chatbot{
+    display: flex;
+    justify-content: start;
+}
+.waitingRoom-page .gptChat .chatarea .chatbot .message{
+    background-color: #ccc;
+    border-radius: 0.5rem 0.5rem 0.5rem 0.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.waitingRoom-page .gptChat .chatarea .user .message{
+    background-color: rgb(205, 205, 255);
+    border-radius: 0.5rem 0.5rem 0.1rem 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.waitingRoom-page .gptChat .chatarea .user{
+    justify-content: end;
+    display: flex;
+}
