@@ -56,7 +56,8 @@ io.on("connection", (socket) => {
   socket.on("start_meeting", () => {
     if (waitingRoomQueue.length > 0) {
       console.log("BEFORE: ", waitingRoomQueue);
-      const user = waitingRoomQueue.shift();
+
+      const user = waitingRoomQueue[0];
       console.log("The user removed is: ", user); // remove the first user in the queue
       connectedClients.delete(user.socketID); // remove the user from the connected clients
 
@@ -70,7 +71,6 @@ io.on("connection", (socket) => {
       // emit the updated patient queue and waiting room count to all clients
       io.emit("patient_queue", waitingRoomQueue);
       io.emit("waiting_room_count", --waitingRoomCount);
-
       // emit the "connect_to_call" event to the user who was removed from the queue
       io.emit("connect_to_call", user.socketID);
     }
