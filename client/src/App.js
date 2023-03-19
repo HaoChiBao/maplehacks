@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import Landing from "./landing";
 
-import Patient from "./Patient/patient";
+import Patient from "./Patient/Patient";
 import WaitingRoom from "./Patient/WaitingRoom";
 
-import Doctor from './Doctor/doctor';
-import DoctorDashboard from './Doctor/dashboard';
+import Doctor from "./Doctor/doctor";
+import DoctorDashboard from "./Doctor/dashboard";
 
 function App() {
   return (

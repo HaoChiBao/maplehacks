@@ -1,7 +1,4 @@
-function DisplayPatient(props) {
-  console.log(props.patient);
-  const name = props.patient.name;
-  const reason = props.patient.reason;
+function DisplayPatient({ name, reason }) {
   return (
     <div className="patient">
       <h2>{name}</h2>
