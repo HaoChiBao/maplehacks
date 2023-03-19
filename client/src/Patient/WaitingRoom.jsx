@@ -10,7 +10,7 @@ const socket = io("http://localhost:3001");
 const WaitingRoom = () => {
   const [messages, setMessages] = useState([]);
   // const messages = [];
-  const [msgComponents, setMsgComponents] = useState();
+  const [msgComponents, setMsgComponents] = useState([]);
   const [userQuery, setUserQuery] = useState("");
 
   const gptQueryKey = (e) => {
@@ -26,14 +26,17 @@ const WaitingRoom = () => {
     messages.push({type: 'user', message: userQuery});
     messages.push({type: 'chatbot', message: "loading..."});
     
-    setMsgComponents(messages.map((message) => {
+    let components = messages.map((message) => {
       return <ChatMessage type={message.type} message={message.message}/>
-    }))
+    });
+    // console.log(components)
+
+    setMsgComponents(components)
 
     console.log("Submitting") 
   
     const url = "https://api.openai.com/v1/engines/text-davinci-003/completions";
-    const key = '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'
+    const key = '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'
     const bearer = 'Bearer ' + key
     // console.log(bearer)
   
@@ -73,9 +76,15 @@ const WaitingRoom = () => {
         messages[messages.length-1] = {type: 'chatbot', message: error}
     })
     .finally(() => {
-      setMsgComponents(messages.map((message) => {
+      let components = messages.map((message) => {
         return <ChatMessage type={message.type} message={message.message}/>
-      }))
+      });
+      // console.log(components)
+  
+      setMsgComponents(components)
+      // setMsgComponents([messages.map((message) => {
+      //   return <ChatMessage type={message.type} message={message.message}/>
+      // })])
     })
     
     
