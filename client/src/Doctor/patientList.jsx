@@ -25,7 +25,13 @@ const PatientList = () => {
     <div className="patientlist">
       <h1>Patient List</h1>
       {currentPatientQueue.map((patient) => {
-        return <DisplayPatient patient={patient.name} key={patient.socketID} />;
+        return (
+          <DisplayPatient
+            name={patient.name}
+            reason={patient.reason}
+            key={patient.socketID}
+          />
+        );
       })}
     </div>
   );

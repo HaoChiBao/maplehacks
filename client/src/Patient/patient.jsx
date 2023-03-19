@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { createSearchParams, Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 
 const socket = io("http://localhost:3001");
@@ -14,12 +14,8 @@ const Patient = () => {
 
   const joinRoom = (e) => {
     e.preventDefault();
-
-    socket.emit("join_waiting_room", { name, reason, socketID });
-
     navigate({
       pathname: "/waiting-room",
-      // state: { name, reason, socketID },
       search: createSearchParams({
         name: name,
         reason: reason,
