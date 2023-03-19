@@ -5,4 +5,28 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    color: white;
+}
+.button {text-decoration: none;}
+.doctor{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 250px;
+    font-size: 20px;
+    color: white;
+    border-color: #7ca1ec;
+    border-width: 5px;
+    margin: 25px;
+}
+.patient{
+    color: white;
+    height: 50px;
+    width: 250px;
+    font-size: 25px;
+    color: white;
+    border-color: #7ca1ec;
+    border-width: 5px;
+    margin: 25px;
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createSearchParams, Link, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
+import './patient.css'
 
 const socket = io("http://localhost:3001");
 
@@ -29,31 +30,21 @@ const Patient = () => {
   };
 
   return (
-    <>
-      <form onSubmit={joinRoom}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="reason">Reason:</label>
-          <input
-            type="text"
-            id="reason"
-            name="reason"
-            value={reason}
-            onChange={(event) => setReason(event.target.value)}
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </>
+    
+    <div className='patient-page'>
+      <div className="form">
+          <h1>Tell Us About Yourself</h1>
+          <h2>Your Name:</h2>
+          <input 
+              type="text" 
+              onChange={(e) => setName(e.target.value)}/>
+          <h2>Reason for Meeting:</h2>
+          <input 
+              type="reason" 
+              onChange={(e) => setReason(e.target.value)}/>
+          <button onClick={joinRoom}>Submit</button>
+      </div>
+    </div>
   );
 };
 

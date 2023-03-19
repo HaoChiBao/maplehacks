@@ -1,4 +1,4 @@
-.doctor-page{
+.patient-page{
     width: 100vw;
     height: 100vh;
     
@@ -8,20 +8,20 @@
     color: white;
 }
 
-.doctor-page .form{
+.patient-page .form h2{
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-
     justify-content: space-evenly;
-
-    height: 80vh;
-    
+    height: 10vh;
     width: 50vw;
-    max-width: 40vh;
+    max-width: 60vh;
 }
-.doctor-page .form input{
+.patient-page .form h1{
+    display: flex;
+    justify-content: center;
+}
+
+.patient-page .form input{
     width: 100%;
     height: 5vh;
     border: none;
@@ -32,8 +32,8 @@
     margin-bottom: 1rem;
 }
 
-.doctor-page .form button{
-    width: 100%;
+.patient-page .form button{
+    width: 106.25%;
     height: 5vh;
     border: none;
     outline: none;
@@ -44,12 +44,12 @@
     color: #fff;
     cursor: pointer;
 }
-.doctor-page .form button:hover{
+.patient-page .form button:hover{
     background-color: #fff;
     color: #0C0D2D;
     border: 1px solid #fff;
 }
-.doctor-page .form .message{
+.patient-page .form .message{
     color: red;
 }
 input{
