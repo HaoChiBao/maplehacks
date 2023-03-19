@@ -1,10 +1,12 @@
 function DisplayPatient({ name, reason }) {
   return (
+    <div style={{ borderBottom: "3px white", paddingBottom: "30px" }}>
     <div className="patient">
-      <h2>{name}</h2>
-      Reason:
-      <h3>{reason}</h3>
+      <h3>{name}</h3>
+      <h5>Reason: {reason}</h5>
     </div>
+    </div>
+
   );
 }
 export default DisplayPatient;

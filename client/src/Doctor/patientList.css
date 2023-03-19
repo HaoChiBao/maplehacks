@@ -1,15 +1,12 @@
 .patientlist{
     height: 100%;
     width: 100%;
-    overflow-y: scroll;
-    border-left: 1px solid #ccc;
+    border-left: 5px solid #6985C0;
     margin: 1rem 0rem 1rem 0rem;
     padding: 1rem;
 }
-.patientlist .patient{
+.patientlist h1{
     display: flex;
-    /* align-items: center; */
-    flex-direction: column;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+    justify-content: center;
+    margin-top: 10px;
 }

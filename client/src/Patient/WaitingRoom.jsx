@@ -108,6 +108,9 @@ const WaitingRoom = () => {
           setUserPosition(i + 1);
           break;
         }
+        if (userPosition == 1) {
+          window.location.assign('/patient/meetingRoom')
+        }
       }
     });
   }, [searchParams]);
