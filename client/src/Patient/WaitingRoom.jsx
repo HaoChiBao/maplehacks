@@ -15,6 +15,7 @@ const TOKEN =
 
 const CHANNEL = "maplehacks";
 
+const messages = [];
 const WaitingRoom = () => {
 
   const [response, setResponse] = useState("");
