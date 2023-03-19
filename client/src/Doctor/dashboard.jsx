@@ -78,6 +78,10 @@ function DoctorDashboard(){
             };
         }, []);
 
+    const [videoIcon, setVideoIcon] = useState('https://www.svgrepo.com/show/310197/video.svg')
+    const [audioIcon, setAudioIcon] = useState('https://www.svgrepo.com/show/309778/mic-on.svg')
+    const [exitIcon, setExitIcon] = useState('https://www.svgrepo.com/show/309378/call-outbound.svg')
+
     return (
         <div className="video-call"
             style={{
@@ -95,19 +99,64 @@ function DoctorDashboard(){
             >
             {/* <Gradient></Gradient> */}
 
-            <div className = 'video-container'
-                style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 40vw)",
-                marginRight: "1vw",
-                columnGap: "1vw",
-                rowGap: "5vw",
-                }}
-            >
-                {users.map((user) => (
-                <VideoPlayer key={user.uid} user={user} />
-                ))}
-            </div>
+                <div className = 'video-container'
+                    style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, 40vw)",
+                    marginRight: "1vw",
+                    columnGap: "1vw",
+                    rowGap: "5vw",
+                    }}
+                >
+                    {users.map((user) => (
+                    <VideoPlayer key={user.uid} user={user} />
+                    ))}
+                <div className="video-buttons">
+                    <button
+                    onClick={() => {
+                        console.log(localTracks)
+                        const videoTrack = localTracks[1];
+                        videoTrack.setEnabled(!videoTrack.enabled);
+                        if(videoTrack.enabled){
+                            setVideoIcon('https://www.svgrepo.com/show/310199/video-off.svg')
+                        } else {
+                            setVideoIcon('https://www.svgrepo.com/show/310197/video.svg')
+                        }
+                    }}
+                    >
+                        <img src = {videoIcon}/>
+                    </button>
+                    <button
+                    onClick={() => {
+                        const audioTrack = localTracks[0];
+                        audioTrack.setEnabled(!audioTrack.enabled);
+                        if(audioTrack.enabled){
+                            setAudioIcon('https://www.svgrepo.com/show/309777/mic-off.svg')
+                        } else {
+                            setAudioIcon('https://www.svgrepo.com/show/309778/mic-on.svg')
+                        }
+                    }}
+                    >
+                        <img src = {audioIcon}/>   
+                    </button>
+
+                    <button
+                    onClick={() => {
+                        for (let localTrack of localTracks) {
+                        localTrack.stop();
+                        localTrack.close();
+                        }
+                        client.off("user-published", handleUserJoined);
+                        client.off("user-left", handleUserLeft);
+                        client.unpublish(temp).then(() => client.leave());
+                        window.location.assign('/doctor/exit')
+                    }}
+                    >
+                        <img src = {exitIcon}/>
+                    </button>
+                    
+                </div>
+                </div>
             </div>
             {isDoctor && <PatientList/>}
 
