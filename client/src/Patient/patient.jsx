@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
-import './patient.css'
+import "./patient.css";
 
 const socket = io("http://localhost:3001");
 
@@ -26,19 +26,14 @@ const Patient = () => {
   };
 
   return (
-    
-    <div className='patient-page'>
+    <div className="patient-page">
       <div className="form">
-          <h1>Tell Us About Yourself</h1>
-          <h2>Your Name:</h2>
-          <input 
-              type="text" 
-              onChange={(e) => setName(e.target.value)}/>
-          <h2>Reason for Meeting:</h2>
-          <input 
-              type="reason" 
-              onChange={(e) => setReason(e.target.value)}/>
-          <button onClick={joinRoom}>Submit</button>
+        <h1>Tell Us About Yourself</h1>
+        <h2>Your Name:</h2>
+        <input type="text" onChange={(e) => setName(e.target.value)} />
+        <h2>Reason for Meeting:</h2>
+        <input type="reason" onChange={(e) => setReason(e.target.value)} />
+        <button onClick={joinRoom}>Submit</button>
       </div>
     </div>
   );
