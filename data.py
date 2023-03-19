@@ -1,10 +1,23 @@
-import pandas as pd
+import csv
 
-# Read Excel file
-df = pd.read_excel('cleandata.csv')
+data = ['']*795
+n = 0
+with open('cleandata.csv', newline='') as csvfile:
+    reader = csv.reader(csvfile)
+    #writer = csv.writer(csvfile)
 
-# Split values in first column by comma and create new columns
-df[['Column1A', 'Column1B']] = df.iloc[:, 0].str.split(',', expand=True)
+    for row in reader:
+        #data = ['']*2
+        split = row[0].split(',[')
+        row[0:1] = split
+        data[n] = row[1]
+        n = n+1
+        #writer.writerow(row[0])
+        # illness = split[0].split(',')
+        # row[0:1] = illness
 
-df.head()
-df.tail()
+with open('newdata.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+
+    for row in data:
+        writer.writerow(row)
