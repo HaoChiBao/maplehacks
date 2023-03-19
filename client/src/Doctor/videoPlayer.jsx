@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-
+import './videoPlayer.css'
 export const VideoPlayer = ({ user }) => {
 
   
@@ -13,13 +13,13 @@ export const VideoPlayer = ({ user }) => {
     return (
       <div>
         <div className = 'username'>
-          {user.uid}
+          {/* {user.uid} */}
         </div>
-        <div className='video'
+        <div className='video-player'
           ref={ref}
         style={{ 
-            width: '45vw', 
-            height: '30vw', 
+            // width: '45vw', 
+            // height: '30vw', 
             // position:'absolute', 
             opacity:'1' }}
         >

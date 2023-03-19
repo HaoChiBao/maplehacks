@@ -1,9 +1,9 @@
 .patientlist{
     height: 100%;
-    width: auto;
+    width: 100%;
     overflow-y: scroll;
     border-left: 1px solid #ccc;
-    margin: 1rem 0rem 1rem 1rem;
+    margin: 1rem 0rem 1rem 0rem;
     padding: 1rem;
 }
 .patientlist .patient{

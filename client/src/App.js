@@ -4,6 +4,8 @@ import Landing from "./landing";
 import Patient from "./Patient/patient";
 import WaitingRoom from "./Patient/WaitingRoom";
 
+import VideoExit from "./Doctor/videoExit";
+
 import Doctor from './Doctor/doctor';
 import DoctorDashboard from './Doctor/dashboard';
 
@@ -15,6 +17,7 @@ function App() {
       <Route path="/waiting-room" element={<WaitingRoom />} />
       <Route path="/doctor" element={<Doctor />} />
       <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
+      <Route path="/doctor/exit" element={<VideoExit />} />
     </Routes>
   );
 }
