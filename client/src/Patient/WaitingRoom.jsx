@@ -16,7 +16,6 @@ const TOKEN =
 
 const CHANNEL = "maplehacks";
 
-const messages = [];
 const WaitingRoom = () => {
   const [response, setResponse] = useState("");
 
@@ -47,7 +46,7 @@ const WaitingRoom = () => {
     const url =
       "https://api.openai.com/v1/engines/text-davinci-003/completions";
     // const key = process.env.GPT_KEY;
-    const key = "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";
+    const key = "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";
     // console.log("Key is: ", key);
     const bearer = "Bearer " + key;
     // console.log(bearer)
@@ -86,7 +85,7 @@ const WaitingRoom = () => {
         setResponse(data["choices"][0].text);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
         setResponse(error.message);
       });
   };
