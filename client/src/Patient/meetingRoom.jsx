@@ -15,8 +15,8 @@ const MeetingRoom = () => {
   const [users, setUsers] = useState([]);
   const [localTracks, setLocalTracks] = useState([]);
 
-  const isDoctor = localStorage.getItem("maplehacks-isdoctor") === "true";
-  console.log(isDoctor, "- is doctor");
+  // const isDoctor = localStorage.getItem("maplehacks-isdoctor") === "true";
+  // console.log(isDoctor, "- is doctor");
 
   const handleUserJoined = async (user, mediaType) => {
     await client.subscribe(user, mediaType);

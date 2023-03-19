@@ -3,6 +3,7 @@ import { useSearchParams, Link, useLocation } from "react-router-dom";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import io from "socket.io-client";
 import "./WaitingRoom.css";
+import { VideoPlayer } from "../Doctor/videoPlayer";
 
 import ChatMessage from "./chatMessage";
 
@@ -101,7 +102,6 @@ const WaitingRoom = () => {
     }
 
     socket.on("patient_queue", (queue) => {
-      console.log(queue);
       setWaitingRoomQueue(queue);
       for (let i = 0; i < queue.length; i++) {
         if (queue[i]["socketID"] === searchParams.get("socketID")) {
@@ -113,32 +113,11 @@ const WaitingRoom = () => {
   }, [searchParams]);
 
   // listen for the 'connect_to_call' event
-  socket.on("connect_to_call", () => {
-    window.location.assign("/doctor/dashboard");
-    // create a new client object
-    const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-    // join the channel using the client object
-    client
-      .join(APP_ID, CHANNEL, TOKEN, null)
-      .then((uid) =>
-        Promise.all([AgoraRTC.createMicrophoneAndCameraTracks(), uid])
-      )
-      .then(([tracks, uid]) => {
-        const [audioTrack, videoTrack] = tracks;
-        setLocalTracks(tracks);
-        setUsers((previousUsers) => [
-          ...previousUsers,
-          {
-            uid,
-            videoTrack,
-            audioTrack,
-          },
-        ]);
-        client.publish(tracks);
-        let temp = null;
-        temp = tracks;
-        // console.log(temp, 'temp')
-      });
+  socket.on("connect_to_call", (socketID) => {
+    console.log(socketID, searchParams.get("socketID"));
+    if (searchParams.get("socketID") === socketID) {
+      window.location.assign("/patient/meeting-room");
+    }
   });
 
   return (

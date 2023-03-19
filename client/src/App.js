@@ -16,6 +16,10 @@ function App() {
       <Route exact path="/" element={<Landing />} />
       <Route path="/patient" element={<Patient />} />
       <Route path="/waiting-room" element={<WaitingRoom />} />
+<<<<<<< HEAD
+=======
+      <Route path="/patient/meeting-room" element={<MeetingRoom />} />
+>>>>>>> nick
       <Route path="/doctor" element={<Doctor />} />
       <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
       <Route path="/doctor/exit" element={<VideoExit />} />
