@@ -87,7 +87,7 @@ const WaitingRoom = () => {
       })
       .catch((error) => {
         console.log(error);
-        setResponse(error);
+        setResponse(error.message);
       });
   };
 
