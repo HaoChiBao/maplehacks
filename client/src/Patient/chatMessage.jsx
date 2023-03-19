@@ -1,10 +1,10 @@
-function ChatMessage(props){
-    return (
-        <div className={props.type}>
-            <div className="message">
-               <p>{props.message}</p>
-            </div>
-        </div>
-    )
+function ChatMessage({ type, message }) {
+  return (
+    <div className={type}>
+      <div className="message">
+        <p>{message}</p>
+      </div>
+    </div>
+  );
 }
 export default ChatMessage;
