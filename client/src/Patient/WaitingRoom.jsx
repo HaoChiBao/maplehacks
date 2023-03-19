@@ -3,6 +3,7 @@ import { useSearchParams, Link, useLocation } from "react-router-dom";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import io from "socket.io-client";
 import "./WaitingRoom.css";
+import { VideoPlayer } from "../Doctor/videoPlayer";
 
 import ChatMessage from "./chatMessage";
 
@@ -15,10 +16,12 @@ const TOKEN =
 
 const CHANNEL = "maplehacks";
 
+const messages = [];
 const WaitingRoom = () => {
-  const [messages, setMessages] = useState([]);
-  const [msgComponents, setMsgComponents] = useState([]);
+  const [response, setResponse] = useState("");
+
   const [userQuery, setUserQuery] = useState("");
+  const messages = [];
   const [waitingRoomCount, setWaitingRoomCount] = useState(0);
   const [searchParams] = useSearchParams();
   const [waitingRoomQueue, setWaitingRoomQueue] = useState([]);
@@ -44,7 +47,7 @@ const WaitingRoom = () => {
     const url =
       "https://api.openai.com/v1/engines/text-davinci-003/completions";
     // const key = process.env.GPT_KEY;
-    const key = "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";
+    const key = "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";
     // console.log("Key is: ", key);
     const bearer = "Bearer " + key;
     // console.log(bearer)
@@ -79,36 +82,14 @@ const WaitingRoom = () => {
         // console.log(Object.keys(data))
         console.log(data);
         console.log(data["choices"][0].text);
-
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { type: "chatbot", message: data["choices"][0].text },
-        ]);
-        console.log(messages);
+        messages.push({ type: "chatbot", message: data["choices"][0].text });
+        setResponse(data["choices"][0].text);
       })
       .catch((error) => {
         console.log(error);
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { type: "chatbot", message: error },
-        ]);
+        setResponse(error);
       });
   };
-
-  useEffect(() => {
-    let components = messages.map((message, index) => {
-      return (
-        <ChatMessage
-          key={index}
-          type={message["type"]}
-          message={message["message"]}
-        />
-      );
-    });
-    setMsgComponents(components);
-
-    console.log("Message components is: , ", msgComponents);
-  }, [messages]);
 
   useEffect(() => {
     if (!userJoined) {
@@ -121,7 +102,6 @@ const WaitingRoom = () => {
     }
 
     socket.on("patient_queue", (queue) => {
-      console.log(queue);
       setWaitingRoomQueue(queue);
       for (let i = 0; i < queue.length; i++) {
         if (queue[i]["socketID"] === searchParams.get("socketID")) {
@@ -133,32 +113,11 @@ const WaitingRoom = () => {
   }, [searchParams]);
 
   // listen for the 'connect_to_call' event
-  socket.on("connect_to_call", () => {
-    window.location.assign("/doctor/dashboard");
-    // create a new client object
-    const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-    // join the channel using the client object
-    client
-      .join(APP_ID, CHANNEL, TOKEN, null)
-      .then((uid) =>
-        Promise.all([AgoraRTC.createMicrophoneAndCameraTracks(), uid])
-      )
-      .then(([tracks, uid]) => {
-        const [audioTrack, videoTrack] = tracks;
-        setLocalTracks(tracks);
-        setUsers((previousUsers) => [
-          ...previousUsers,
-          {
-            uid,
-            videoTrack,
-            audioTrack,
-          },
-        ]);
-        client.publish(tracks);
-        let temp = null;
-        temp = tracks;
-        // console.log(temp, 'temp')
-      });
+  socket.on("connect_to_call", (socketID) => {
+    console.log(socketID, searchParams.get("socketID"));
+    if (searchParams.get("socketID") === socketID) {
+      window.location.assign("/patient/meeting-room");
+    }
   });
 
   return (
@@ -172,7 +131,7 @@ const WaitingRoom = () => {
       </div>
 
       <div className="gptChat">
-        <div>
+        <div className="title">
           <h1>Chatbot</h1>
           <p>
             While you're waiting, discuss with our chatbot about occurring
@@ -184,7 +143,7 @@ const WaitingRoom = () => {
         </div>
 
         <div className="chatarea">
-          <div className="chatbox">{msgComponents}</div>
+          <div className="chatbox">{response}</div>
           <div className="queryBox">
             <input
               type="text"

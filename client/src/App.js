@@ -15,7 +15,9 @@ function App() {
       <Route exact path="/" element={<Landing />} />
       <Route path="/patient" element={<Patient />} />
       <Route path="/waiting-room" element={<WaitingRoom />} />
-      <Route path="/meeting-room" element={<MeetingRoom />} />
+
+      <Route path="/patient/meeting-room" element={<MeetingRoom />} />
+
       <Route path="/doctor" element={<Doctor />} />
       <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
       <Route path="/doctor/exit" element={<VideoExit />} />
