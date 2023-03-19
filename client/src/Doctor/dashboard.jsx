@@ -67,9 +67,6 @@ const DoctorDashboard = () => {
         // console.log(temp, 'temp')
       });
 
-    const handleStartMeeting = () => {
-      socket.emit("start_meeting");
-    };
     return () => {
       for (let localTrack of localTracks) {
         localTrack.stop();
