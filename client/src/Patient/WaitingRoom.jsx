@@ -16,7 +16,6 @@ const TOKEN =
 
 const CHANNEL = "maplehacks";
 
-const messages = [];
 const WaitingRoom = () => {
   const [response, setResponse] = useState("");
 
@@ -86,7 +85,7 @@ const WaitingRoom = () => {
         setResponse(data["choices"][0].text);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
         setResponse(error.message);
       });
   };
