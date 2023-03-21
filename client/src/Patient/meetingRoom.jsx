@@ -1,8 +1,8 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
-import PatientList from "../Doctor/PatientList";
-import "../Doctor/Dashboard.css";
+import PatientList from "../Doctor/patientList";
+import "../Doctor/dashboard.css";
 import React, { useEffect, useState } from "react";
-import { VideoPlayer } from "../Doctor/VideoPlayer";
+import { VideoPlayer } from "../Doctor/videoPlayer";
 
 const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 // const APP_ID = process.env.REACT_APP_AGORA_APP_ID;

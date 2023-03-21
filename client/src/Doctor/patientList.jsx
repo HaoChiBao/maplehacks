@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DisplayPatient from "./DisplayPatient";
-import "./PatientList.css";
+import "./patientList.css";
 import io from "socket.io-client";
 
 const socket = io("http://localhost:3001/");

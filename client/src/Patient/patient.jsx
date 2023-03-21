@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
-import "./Patient.css";
+import "./patient.css";
 
 const Patient = () => {
   const [name, setName] = useState("");

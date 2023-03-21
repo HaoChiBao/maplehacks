@@ -29,8 +29,10 @@ const WaitingRoom = () => {
 
     const url =
       "https://api.openai.com/v1/engines/text-davinci-003/completions";
-    const key = process.env.REACT_APP_GPT_KEY;
+    const key = process.env.REACT_APP_CHATGPT_KEY;
     const bearer = "Bearer " + key;
+
+    console.log(key);
 
     let prompt =
       "Use the follow text as context of previous ChatGPT messages (note: instead of calling yourself ChatGPT, call yourself MedNow): \n\n";
