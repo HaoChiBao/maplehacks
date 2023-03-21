@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import DisplayPatient from "./DisplayPatient";
-import "./patientList.css";
+import "./PatientList.css";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:3000/");
+const socket = io("http://localhost:3001/");
 
 const PatientList = () => {
   const [currentPatientQueue, setcurrentPatientQueue] = useState([]);
@@ -15,10 +15,10 @@ const PatientList = () => {
       setcurrentPatientQueue(queue);
     });
 
-    // // Clean up event listener when component unmounts
-    // return () => {
-    //   socket.off("patient_queue");
-    // };
+    // Clean up event listener when component unmounts
+    return () => {
+      socket.off("patient_queue");
+    };
   }, []);
 
   return (

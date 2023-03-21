@@ -1,33 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams, Link, useLocation } from "react-router-dom";
-import AgoraRTC from "agora-rtc-sdk-ng";
+import { useSearchParams } from "react-router-dom";
 import io from "socket.io-client";
 import "./WaitingRoom.css";
-import { VideoPlayer } from "../Doctor/videoPlayer";
-
-import ChatMessage from "./chatMessage";
-
-const socket = io("http://localhost:3000/");
-
-const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-const APP_ID = "fd724da3607e4f568c1775a94077234d";
-const TOKEN =
-  "007eJxTYFjpwGwXrVYQIBBycvWT2883rnyw60C0RXnNyms8s9t0TNsVGFLSTJNMUtKMDVPNjE2SkpOT0kxSTMyTUo2MTZMM0lJSDX+LpjQEMjKE2TEyMTJAIIjPxZCbWJCTmpGYnF3MwAAAK8ch2Q==";
-
-const CHANNEL = "maplehacks";
 
 const WaitingRoom = () => {
+  const socket = io("http://localhost:3001/");
   const [response, setResponse] = useState("");
-
   const [userQuery, setUserQuery] = useState("");
-  const messages = [];
-  const [waitingRoomCount, setWaitingRoomCount] = useState(0);
   const [searchParams] = useSearchParams();
   const [waitingRoomQueue, setWaitingRoomQueue] = useState([]);
   const [userPosition, setUserPosition] = useState(0);
   const [userJoined, setUserJoined] = useState(false);
-  const [users, setUsers] = useState([]);
-  const [localTracks, setLocalTracks] = useState([]);
+  const messages = [];
 
   const gptQueryKey = (e) => {
     if (e.key === "Enter") {
@@ -45,11 +29,8 @@ const WaitingRoom = () => {
 
     const url =
       "https://api.openai.com/v1/engines/text-davinci-003/completions";
-    // const key = process.env.GPT_KEY;
-    const key = "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";
-    // console.log("Key is: ", key);
+    const key = process.env.REACT_APP_GPT_KEY;
     const bearer = "Bearer " + key;
-    // console.log(bearer)
 
     let prompt =
       "Use the follow text as context of previous ChatGPT messages (note: instead of calling yourself ChatGPT, call yourself MedNow): \n\n";
@@ -78,7 +59,6 @@ const WaitingRoom = () => {
         return response.json();
       })
       .then((data) => {
-        // console.log(Object.keys(data))
         console.log(data);
         console.log(data["choices"][0].text);
         messages.push({ type: "chatbot", message: data["choices"][0].text });

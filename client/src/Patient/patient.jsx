@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import io from "socket.io-client";
-import "./patient.css";
-
-const socket = io("http://localhost:3000/");
+import { io } from "socket.io-client";
+import "./Patient.css";
 
 const Patient = () => {
-  // state to set name and reason for user
   const [name, setName] = useState("");
+  const [socketID, setSocketID] = useState();
   const [reason, setReason] = useState("");
   const navigate = useNavigate();
 
-  const socketID = socket.id;
+  useEffect(() => {
+    const socket = io("http://localhost:3001/");
+    socket.on("connect", () => {
+      setSocketID(socket.id);
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const joinRoom = (e) => {
     e.preventDefault();
@@ -32,7 +38,7 @@ const Patient = () => {
         <h2>Full Name:</h2>
         <input type="text" onChange={(e) => setName(e.target.value)} />
         <h2>Reason for Meeting:</h2>
-        <input type="reason" onChange={(e) => setReason(e.target.value)} />
+        <input type="text" onChange={(e) => setReason(e.target.value)} />
         <button onClick={joinRoom}>Submit</button>
       </div>
     </div>

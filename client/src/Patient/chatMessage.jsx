@@ -1,4 +1,4 @@
-function ChatMessage({ type, message }) {
+const ChatMessage = ({ type, message }) => {
   return (
     <div className={type}>
       <div className="message">
@@ -6,5 +6,5 @@ function ChatMessage({ type, message }) {
       </div>
     </div>
   );
-}
+};
 export default ChatMessage;

@@ -1,12 +1,12 @@
-.patientlist{
-    height: 100%;
-    width: 100%;
-    border-left: 5px solid #6985C0;
-    margin: 1rem 0rem 1rem 0rem;
-    padding: 1rem;
+.patientlist {
+  height: 100%;
+  width: 100%;
+  border-left: 5px solid #6985c0;
+  margin: 1rem 0rem 1rem 0rem;
+  padding: 1rem;
 }
-.patientlist h1{
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+.patientlist h1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }

@@ -1,23 +1,45 @@
 import React, { useEffect, useState } from "react";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import io from "socket.io-client";
-import PatientList from "./patientList";
-import "./dashboard.css";
+import PatientList from "./PatientList";
+import "./Dashboard.css";
 import StartMeeting from "./StartMeeting";
-import { VideoPlayer } from "./videoPlayer";
+import { VideoPlayer } from "./VideoPlayer";
 
 const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-const APP_ID = "fd724da3607e4f568c1775a94077234d";
+// const APP_ID = process.env.REACT_APP_AGORA_APP_ID;
+// const TOKEN = process.env.REACT_APP_AGORA_TOKEN;
+// console.log("Dashboard: ", APP_ID, " ", TOKEN);
+const APP_ID = "26ab5f3053b0426e8528790f4bbb49aa";
 const TOKEN =
-  "007eJxTYFjpwGwXrVYQIBBycvWT2883rnyw60C0RXnNyms8s9t0TNsVGFLSTJNMUtKMDVPNjE2SkpOT0kxSTMyTUo2MTZMM0lJSDX+LpjQEMjKE2TEyMTJAIIjPxZCbWJCTmpGYnF3MwAAAK8ch2Q==";
+  "007eJxTYLhfmR+zr6OwfMPzIp2Shfm3Q/fm2DhMTazzOssgPbeu8boCg5FZYpJpmrGBqXGSgYmRWaqFqZGFuaVBmklSUpKJZWKi8X+JlIZARobTIRMZGRkgEMTnZnDJTy7JL9J1TszJYWAAAEyFIek=";
+const CHANNEL = "Doctor-Call";
 
-const CHANNEL = "maplehacks";
-const socket = io("http://localhost:3000/");
+const socket = io("http://localhost:3001/");
 
 const DoctorDashboard = () => {
   const [users, setUsers] = useState([]);
   const [localTracks, setLocalTracks] = useState([]);
-  //   const [meetingStarted, setMeetingStarted] = useState(false);
+  // const [token, setToken] = useState(null);
+
+  // useEffect(() => {
+  //   // Generate temporary token
+  //   fetch("/generate-token", {
+  //     method: "POST",
+  //     body: JSON.stringify({ CHANNEL }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // Set the temporary token
+  //       setToken(data.token);
+  //     });
+  // }, [CHANNEL]);
+
+  // Join the channel with the temporary token
+  // client.join(APP_ID, CHANNEL, TOKEN);
 
   const isDoctor = localStorage.getItem("maplehacks-isdoctor") === "true";
   console.log(isDoctor, "- is doctor");
@@ -64,7 +86,6 @@ const DoctorDashboard = () => {
         ]);
         client.publish(tracks);
         temp = tracks;
-        // console.log(temp, 'temp')
       });
 
     return () => {

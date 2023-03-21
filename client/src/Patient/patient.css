@@ -1,57 +1,57 @@
-.patient-page{
-    width: 100vw;
-    height: 100vh;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+.patient-page {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
-.patient-page .form h2{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 10vh;
-    width: 50vw;
-    max-width: 60vh;
+.patient-page .form h2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 10vh;
+  width: 50vw;
+  max-width: 60vh;
 }
-.patient-page .form h1{
-    display: flex;
-    justify-content: center;
-}
-
-.patient-page .form input{
-    width: 100%;
-    height: 5vh;
-    border: none;
-    border-bottom: 1px solid white;
-    outline: none;
-    font-size: 1.5rem;
-    padding: 0 1rem;
-    margin-bottom: 1rem;
+.patient-page .form h1 {
+  display: flex;
+  justify-content: center;
 }
 
-.patient-page .form button{
-    width: 106.25%;
-    height: 5vh;
-    border: none;
-    outline: none;
-    font-size: 1.5rem;
-    padding: 0 1rem;
-    margin-bottom: 1rem;
-    background-color: #7ca1ec;
-    color: #fff;
-    cursor: pointer;
+.patient-page .form input {
+  width: 100%;
+  height: 5vh;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
 }
-.patient-page .form button:hover{
-    background-color: #fff;
-    color: #0C0D2D;
-    border: 1px solid #fff;
+
+.patient-page .form button {
+  width: 106.25%;
+  height: 5vh;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  background-color: #7ca1ec;
+  color: #fff;
+  cursor: pointer;
 }
-.patient-page .form .message{
-    color: red;
+.patient-page .form button:hover {
+  background-color: #fff;
+  color: #0c0d2d;
+  border: 1px solid #fff;
 }
-input{
-    color:white;
+.patient-page .form .message {
+  color: red;
+}
+input {
+  color: white;
 }

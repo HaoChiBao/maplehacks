@@ -1,22 +1,22 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
-import PatientList from "../Doctor/patientList";
-import "../Doctor/dashboard.css";
+import PatientList from "../Doctor/PatientList";
+import "../Doctor/Dashboard.css";
 import React, { useEffect, useState } from "react";
-import { VideoPlayer } from "../Doctor/videoPlayer";
+import { VideoPlayer } from "../Doctor/VideoPlayer";
 
 const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-const APP_ID = "fd724da3607e4f568c1775a94077234d";
-const TOKEN =
-  "007eJxTYFjpwGwXrVYQIBBycvWT2883rnyw60C0RXnNyms8s9t0TNsVGFLSTJNMUtKMDVPNjE2SkpOT0kxSTMyTUo2MTZMM0lJSDX+LpjQEMjKE2TEyMTJAIIjPxZCbWJCTmpGYnF3MwAAAK8ch2Q==";
+// const APP_ID = process.env.REACT_APP_AGORA_APP_ID;
+// const TOKEN = process.env.REACT_APP_AGORA_TOKEN;
+// console.log("Meeting Room: ", APP_ID, " ", TOKEN);
 
-const CHANNEL = "maplehacks";
+const APP_ID = "26ab5f3053b0426e8528790f4bbb49aa";
+const TOKEN =
+  "007eJxTYLhfmR+zr6OwfMPzIp2Shfm3Q/fm2DhMTazzOssgPbeu8boCg5FZYpJpmrGBqXGSgYmRWaqFqZGFuaVBmklSUpKJZWKi8X+JlIZARobTIRMZGRkgEMTnZnDJTy7JL9J1TszJYWAAAEyFIek=";
+const CHANNEL = "Doctor-Call";
 
 const MeetingRoom = () => {
   const [users, setUsers] = useState([]);
   const [localTracks, setLocalTracks] = useState([]);
-
-  // const isDoctor = localStorage.getItem("maplehacks-isdoctor") === "true";
-  // console.log(isDoctor, "- is doctor");
 
   const handleUserJoined = async (user, mediaType) => {
     await client.subscribe(user, mediaType);
@@ -60,7 +60,6 @@ const MeetingRoom = () => {
         ]);
         client.publish(tracks);
         temp = tracks;
-        // console.log(temp, 'temp')
       });
     return () => {
       for (let localTrack of localTracks) {

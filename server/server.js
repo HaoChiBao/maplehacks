@@ -1,17 +1,17 @@
 const express = require("express");
 const http = require("http");
 const app = express();
-const cors = require("cors");
+// const cors = require("cors");
 const server = http.createServer(app);
+const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+// app.use(cors());
 const io = require("socket.io")(server, {
   cors: {
     origin: "*",
   },
   pingTimeout: 15000,
 });
-const PORT = process.env.PORT || 3001;
 
 let waitingRoomCount = 0;
 let waitingRoomQueue = [];
@@ -27,8 +27,6 @@ class User {
 }
 
 io.on("connection", (socket) => {
-  console.log("Did you guys get here?");
-
   socket.on("join_waiting_room", (data) => {
     console.log(`${data.name} joined the waiting room`);
 
@@ -47,6 +45,11 @@ io.on("connection", (socket) => {
     // emit the updated patient queue and new user's position to all clients
     io.emit("patient_queue", waitingRoomQueue);
     io.emit("waiting_room_count", waitingRoomCount);
+
+    console.log(
+      "After user joined, this is the list of people in waiting room: ",
+      waitingRoomQueue
+    );
   });
 
   socket.on("get_patient_queue", () => {
@@ -94,6 +97,11 @@ io.on("connection", (socket) => {
       }
     }
 
+    console.log(
+      "After the user disconnects, this is queue: ",
+      waitingRoomQueue
+    );
+
     // update the position of all users in the queue
     waitingRoomQueue.forEach((user, index) => {
       user.position--;
@@ -104,6 +112,18 @@ io.on("connection", (socket) => {
     io.emit("waiting_room_count", --waitingRoomCount);
   });
 });
+
+// const AgoraRTC = require("agora-rtc-sdk-ng");
+// const agora = new AgoraRTC.RtcTokenBuilder(
+//   process.env.REACT_APP_AGORA_APP_ID, // App ID
+//   process.env.REACT_APP_AGORA_APP_CERTIFICATE // App certificate
+// );
+
+// const token = agora.buildTokenWithUid(
+//   "Doctor-Call", // Channel name
+//   null, // User ID
+//   AgoraRTC.RtcRole.PUBLISHER // User role // Token expiration time in seconds
+// );
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

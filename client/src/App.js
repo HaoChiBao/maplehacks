@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import Landing from "./landing";
 
-import Patient from "./Patient/patient";
+import Patient from "./Patient/Patient";
 import WaitingRoom from "./Patient/WaitingRoom";
-import MeetingRoom from "./Patient/meetingRoom";
-import VideoExit from "./Doctor/videoExit";
+import MeetingRoom from "./Patient/MeetingRoom";
+import VideoExit from "./Doctor/VideoExit";
 
-import Doctor from "./Doctor/doctor";
-import DoctorDashboard from "./Doctor/dashboard";
+import Doctor from "./Doctor/Doctor";
+import DoctorDashboard from "./Doctor/Dashboard";
 
 function App() {
   return (
